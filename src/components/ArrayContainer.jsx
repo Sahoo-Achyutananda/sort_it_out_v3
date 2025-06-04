@@ -91,7 +91,8 @@ function ArrayContainer({ state, dispatch, algo }) {
         </div>
         <div className={styles.stats}>
           <Transcript state={state} />
-          <div className={styles.counts}>
+          <Counts state={state} />
+          {/* <div className={styles.counts}>
             <div className={styles.compsDiv}>
               <div>{state.comparisons}</div>
               <span>Comparisons</span>
@@ -100,13 +101,25 @@ function ArrayContainer({ state, dispatch, algo }) {
               <div>{state.swaps}</div>
               <span>Swaps</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
   );
 }
 
+function Counts({ state }) {
+  return (
+    <div className={styles.Counts}>
+      <div className={styles.Comparisons}>
+        {state.comparisons} <span>Comparisons</span>
+      </div>
+      <div className={styles.Swaps}>
+        {state.swaps} <span>Swaps</span>
+      </div>
+    </div>
+  );
+}
 function Bar({ arrayContainerRef, state, height, index }) {
   const [dimensions, setDimensions] = useState({
     height: "50px",
