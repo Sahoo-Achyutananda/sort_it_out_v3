@@ -19,10 +19,11 @@ export function reducer(state, action) {
         return {
           ...state,
           array: step.arrayState,
-          selectedIndices: step.comparedIndices,
-          swaps: step.swaps,
-          comparisons: step.comparisons,
+          selectedIndices: step.comparedIndices || state.selectedIndices || [],
+          swaps: step.swaps || state.swaps || 0,
+          comparisons: step.comparisons || state.swaps || 0,
           currentStep: state.currentStep + 1,
+          highlightIndices: step.highlightedIndices || state.highlightIndices,
         };
       }
       return state;
@@ -34,10 +35,11 @@ export function reducer(state, action) {
         return {
           ...state,
           array: step.arrayState,
-          selectedIndices: step.comparedIndices,
-          swaps: step.swaps,
-          comparisons: step.comparisons,
+          selectedIndices: step.comparedIndices || state.selectedIndices || [],
+          swaps: step.swaps || state.swaps || 0,
+          comparisons: step.comparisons || state.comparisons || 0,
           currentStep: state.currentStep - 1,
+          highlightIndices: step.highlightedIndices || state.highlightIndices,
         };
       }
       return state;
@@ -54,6 +56,8 @@ export function reducer(state, action) {
         array: state.history[parseInt(action.payload)].arrayState,
         selectedIndices:
           state.history[parseInt(action.payload)].comparedIndices,
+        // highlightIndices:
+        //   state.history[parseInt(action.payload)].highlightedIndices,
         currentStep: parseInt(action.payload),
         isPlaying: false,
         swaps: state.history[parseInt(action.payload)].swaps,
@@ -89,6 +93,7 @@ export function reducer(state, action) {
         array: utils.generateArray(state.value),
         selectedIndices: [],
         swappedIndices: [],
+        highlightIndices: [],
         isSorting: false,
         time: 0,
         swaps: 0,
@@ -105,6 +110,7 @@ export function reducer(state, action) {
         array: utils.generateArray(Number(action.payload)),
         selectedIndices: [],
         swappedIndices: [],
+        highlightIndices: [],
         isSorting: false,
         custom_input: "",
         time: 0,
