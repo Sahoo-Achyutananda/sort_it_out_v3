@@ -10,13 +10,13 @@ function RouteChangeWrapper({ children }) {
     const path = location.pathname;
 
     const titleMap = {
-      "/": "Home | Sort Visualizer",
-      "/bubble": "Bubble Sort | Sort Visualizer",
-      "/selection": "Selection Sort | Sort Visualizer",
-      "/insertion": "Insertion Sort | Sort Visualizer",
-      "/merge": "Merge Sort | Sort Visualizer",
-      "/quick": "Quick Sort | Sort Visualizer",
-      "/racemode": "Race Mode | Sort Visualizer",
+      "/": "Home | Sort Visualizer - v3 ",
+      "/bubble": "Bubble Sort | Sort Visualizer - v3 ",
+      "/selection": "Selection Sort | Sort Visualizer - v3 ",
+      "/insertion": "Insertion Sort | Sort Visualizer - v3 ",
+      "/merge": "Merge Sort | Sort Visualizer - v3 ",
+      "/quick": "Quick Sort | Sort Visualizer - v3 ",
+      "/racemode": "Race Mode | Sort Visualizer - v3 ",
     };
 
     document.title = titleMap[path] || "Sort Visualizer";

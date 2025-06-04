@@ -16,30 +16,6 @@ import { forwardRef } from "react";
 function ArrayContainer({ state, dispatch, algo }) {
   const arrayContainerRef = useRef(null);
 
-  // const compSpan = useRef(null);
-  // const [compBlink, setCompBlink] = useState(false);
-  // const [swapBlink, setSwapBlink] = useState(false);
-
-  // useEffect(() => {
-  //   setCompBlink(true);
-  //   const speedFactor = 1000 / state.speed;
-  //   const timer = setTimeout(() => {
-  //     setCompBlink(false);
-  //   }, speedFactor);
-
-  //   return () => clearTimeout(timer);
-  // }, [state.comparisons, state.speed]);
-
-  // useEffect(() => {
-  //   setSwapBlink(true);
-  //   const speedFactor = 1000 / state.speed;
-  //   const timer = setTimeout(() => {
-  //     setSwapBlink(false);
-  //   }, speedFactor);
-
-  //   return () => clearTimeout(timer);
-  // }, [state.comparisons, state.speed]);
-
   useEffect(() => {
     let interval;
     if (state.isPlaying) {
@@ -90,18 +66,8 @@ function ArrayContainer({ state, dispatch, algo }) {
           </div>
         </div>
         <div className={styles.stats}>
-          <Transcript state={state} />
+          <Transcript state={state} dispatch={dispatch} />
           <Counts state={state} />
-          {/* <div className={styles.counts}>
-            <div className={styles.compsDiv}>
-              <div>{state.comparisons}</div>
-              <span>Comparisons</span>
-            </div>
-            <div className={styles.swapsDiv}>
-              <div>{state.swaps}</div>
-              <span>Swaps</span>
-            </div>
-          </div> */}
         </div>
       </div>
     </>
@@ -249,7 +215,7 @@ function ControlButtons({ state, dispatch, algo }) {
   );
 }
 
-function Transcript({ state }) {
+function Transcript({ state, dispatch }) {
   const itemRefs = useRef([]);
   const parentRef = useRef(null);
   const [toggleAccordian, setToggleAccordian] = useState(false);
@@ -259,17 +225,15 @@ function Transcript({ state }) {
   // }
   // const scrollTimeout = useRef(null);
   // const [isUserScrolling, setIsUserScrolling] = useState(false);
+  // const handleScroll = () => {
+  //   setIsUserScrolling(true);
+  //   setTimeout(() => {
+  //     setIsUserScrolling(false);
+  //   }, 1500);
+  // };
 
   // useEffect(() => {
   //   const parent = parentRef.current;
-
-  //   const handleScroll = () => {
-  //     setIsUserScrolling(true);
-  //     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-  //     scrollTimeout.current = setTimeout(() => {
-  //       setIsUserScrolling(false);
-  //     }, 1500);
-  //   };
 
   //   if (parent) {
   //     parent.addEventListener("scroll", handleScroll);
@@ -322,6 +286,7 @@ function Transcript({ state }) {
           !state.isSorting ? styles.TranscriptPlaceholder : styles.Transcript
         } ${toggleAccordian ? styles.show : styles.hide}`}
         ref={parentRef}
+        // onScroll={handleScroll}
       >
         {state.isSorting ? (
           state.history.map((item, index) => (
@@ -331,6 +296,7 @@ function Transcript({ state }) {
               index={index}
               item={item}
               state={state}
+              dispatch={dispatch}
             />
           ))
         ) : (
@@ -342,7 +308,7 @@ function Transcript({ state }) {
 }
 
 const TranscriptItem = forwardRef(function TranscriptItem(
-  { index, item, state },
+  { index, item, state, dispatch },
   ref
 ) {
   const isActive = index === state.currentStep;
@@ -351,7 +317,11 @@ const TranscriptItem = forwardRef(function TranscriptItem(
   }`;
 
   return (
-    <div className={className} ref={ref}>
+    <div
+      className={className}
+      ref={ref}
+      onClick={() => dispatch({ type: "seek", payload: index })}
+    >
       {item.description}
     </div>
   );

@@ -59,7 +59,7 @@ export function reducer(state, action) {
         // highlightIndices:
         //   state.history[parseInt(action.payload)].highlightedIndices,
         currentStep: parseInt(action.payload),
-        isPlaying: false,
+        // isPlaying: false,
         swaps: state.history[parseInt(action.payload)].swaps,
         comparisons: state.history[parseInt(action.payload)].comparisons,
       };

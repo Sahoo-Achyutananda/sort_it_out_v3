@@ -32,7 +32,7 @@ function selectionSort(arr) {
 
     if (min_index !== i) {
       [array[min_index], array[i]] = [array[i], array[min_index]];
-      comparisons++;
+      swaps++;
       history.push({
         arrayState: [...array],
         comparisons: comparisons,

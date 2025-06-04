@@ -50,7 +50,9 @@ function quickSort(arr, low, high, history, stats) {
 function performQuickSort(arr) {
   const history = [];
   const stats = { comparisons: 0, swaps: 0 };
-  quickSort(arr, 0, arr.length - 1, history, stats);
+  const array = [...arr];
+
+  quickSort(array, 0, arr.length - 1, history, stats);
 
   return history;
 }
