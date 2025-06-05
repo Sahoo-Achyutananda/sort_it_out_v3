@@ -2,6 +2,8 @@ import styles from "./ProjectDescription.module.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import StackIcon from "tech-stack-icons";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 function ProjectDescription() {
   const iconSize = { width: "25px", height: "25px" };
@@ -90,15 +92,12 @@ function ProjectDescription() {
               </li>
             </ul>
           </div>
-          <button
-            className={styles.visitBtn}
-            onClick={() =>
-              (window.location.href =
-                "https://sorting-visualizer-achyutananda-sahoo.netlify.app/")
+          <NavButtons
+            live={"https://sorting-visualizer-achyutananda-sahoo.netlify.app/"}
+            github={
+              "https://github.com/Sahoo-Achyutananda/Sorting_Algorithm_Visualizer"
             }
-          >
-            Visit v1
-          </button>
+          />
         </div>
 
         {/* Version 2 */}
@@ -166,15 +165,10 @@ function ProjectDescription() {
             </ul>
           </div>
 
-          <button
-            className={styles.visitBtn}
-            onClick={() =>
-              (window.location.href =
-                "https://sort-it-out-v2-achyutananda-sahoo.netlify.app")
-            }
-          >
-            Visit v2
-          </button>
+          <NavButtons
+            live={"https://sort-it-out-v2-achyutananda-sahoo.netlify.app/"}
+            github={"https://github.com/Sahoo-Achyutananda/sort_it_out_v2"}
+          />
         </div>
 
         {/* Version 3 */}
@@ -243,13 +237,10 @@ function ProjectDescription() {
             </ul>
           </div>
 
-          <button
-            className={styles.visitBtn}
-            disabled
-            onClick={() => (window.location.href = "/v3")}
-          >
-            Visit v3
-          </button>
+          <NavButtons
+            live={"https://sort-it-out-v3-achyutananda-sahoo.netlify.app/"}
+            github={"https://github.com/Sahoo-Achyutananda/sort_it_out_v3"}
+          />
         </div>
       </div>
     </div>
@@ -257,3 +248,22 @@ function ProjectDescription() {
 }
 
 export default ProjectDescription;
+
+function NavButtons({ live, github }) {
+  return (
+    <div className={styles.buttons}>
+      <button
+        className={styles.visitBtn}
+        onClick={() => (window.location.href = live)}
+      >
+        Live Link <OpenInNewIcon fontSize="small" />
+      </button>
+      <button
+        className={styles.githubBtn}
+        onClick={() => (window.location.href = github)}
+      >
+        Github <GitHubIcon fontSize="small" />
+      </button>
+    </div>
+  );
+}
