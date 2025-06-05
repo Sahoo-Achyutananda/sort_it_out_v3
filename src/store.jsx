@@ -25,7 +25,11 @@ export function reducer(state, action) {
           swaps: step.swaps || state.swaps || 0,
           comparisons: step.comparisons || state.swaps || 0,
           currentStep: state.currentStep + 1,
-          highlightIndices: step.highlightedIndices || state.highlightIndices,
+          highlightIndices:
+            step.highlightIndices || state.highlightIndices || [],
+          swappedIndices: step.swappedIndices || [],
+          highlightValues: step.highlightValues?.values || [],
+          highlightValueText: step.highlightValues?.text || "",
         };
       }
       return state;
@@ -42,7 +46,11 @@ export function reducer(state, action) {
           swaps: step.swaps || state.swaps || 0,
           comparisons: step.comparisons || state.comparisons || 0,
           currentStep: state.currentStep - 1,
-          highlightIndices: step.highlightedIndices || state.highlightIndices,
+          highlightIndices:
+            step.highlightIndices || state.highlightIndices || [],
+          swappedIndices: step.swappedIndices || [],
+          highlightValues: step.highlightValues?.values || [],
+          highlightValueText: step.highlightValues?.text || "",
         };
       }
       return state;
@@ -60,13 +68,21 @@ export function reducer(state, action) {
           state.currentStep === state.history.length - 1 ? false : true,
         array: state.history[parseInt(action.payload)].arrayState,
         selectedIndices:
-          state.history[parseInt(action.payload)].comparedIndices,
-        // highlightIndices:
-        //   state.history[parseInt(action.payload)].highlightedIndices,
+          state.history[parseInt(action.payload)].comparedIndices || [],
+        swappedIndices:
+          state.history[parseInt(action.payload)].swappedIndices || [],
+        highlightIndices:
+          state.history[parseInt(action.payload)].highlightIndices ||
+          state.highlightIndices ||
+          [],
         currentStep: parseInt(action.payload),
         // isPlaying: false,
         swaps: state.history[parseInt(action.payload)].swaps,
         comparisons: state.history[parseInt(action.payload)].comparisons,
+        highlightValues:
+          state.history[parseInt(action.payload)].highlightValues?.values || [],
+        highlightValueText:
+          state.history[parseInt(action.payload)].highlightValues?.text || "",
       };
 
     // Taken from the previous version.
@@ -99,6 +115,7 @@ export function reducer(state, action) {
         selectedIndices: [],
         swappedIndices: [],
         highlightIndices: [],
+        highlightValues: [],
         isSorting: false,
         time: 0,
         swaps: 0,
@@ -116,6 +133,7 @@ export function reducer(state, action) {
         selectedIndices: [],
         swappedIndices: [],
         highlightIndices: [],
+        highlightValues: [],
         isSorting: false,
         custom_input: "",
         time: 0,
@@ -211,13 +229,15 @@ export const initialState = {
   value: 20,
   toggle: "bar", // can have only 2 values - bar and box
   array: Array.from({ length: 20 }, () => Math.floor(Math.random() * 350) + 1),
-  selectedIndices: [],
-  highlightIndices: [],
+
   isSorting: false,
   time: 0,
   swaps: 0,
   comparisons: 0,
-  description: "Start to see details.",
-  swappedIndices: [],
-  hold: [], // to highlight a particular bar/box in the visualizer - used to show current min element in Selection sort
+
+  selectedIndices: [], // to show the values being compared
+  swappedIndices: [], // to show values being swapped
+  highlightValues: [], // to highlight a particular bar/box in the visualizer - used to show current min element in Selection sort
+  highlightValueText: "",
+  highlightIndices: [], // to highlight a particular index in the visualizer - used to show current min element in Selection sort
 };

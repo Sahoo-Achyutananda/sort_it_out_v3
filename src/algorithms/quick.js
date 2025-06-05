@@ -1,40 +1,64 @@
 function partition(arr, l, r, history, stats) {
-  let pivot = arr[r];
+  const pivot = arr[r];
   let i = l - 1;
 
   for (let j = l; j < r; j++) {
     stats.comparisons++;
+
     history.push({
       arrayState: [...arr],
       comparisons: stats.comparisons,
       swaps: stats.swaps,
-      comparedIndices: [r, j],
-      description: `Comparing arr[${r}](${arr[r]}) & arr[${j}](${arr[j]})`,
+      comparedIndices: [j],
+      highlightValues: { values: [r], text: "Pivot" },
+      highlightIndices: Array.from(
+        { length: r - l + 1 },
+        (_, index) => l + index
+      ),
+      description: `Comparing pivot arr[${r}] = ${pivot} with arr[${j}] = ${arr[j]}`,
     });
-    if (arr[j] <= pivot && i != j) {
-      i++;
-      stats.swaps++;
 
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-      history.push({
-        arrayState: [...arr],
-        comparisons: stats.comparisons,
-        swaps: stats.swaps,
-        comparedIndices: [i, j],
-        description: `Swapped arr[${i}](${arr[i]}) & arr[${j}](${arr[j]})`,
-      });
+    if (arr[j] <= pivot) {
+      i++;
+
+      if (i !== j) {
+        stats.swaps++;
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+
+        history.push({
+          arrayState: [...arr],
+          comparisons: stats.comparisons,
+          swaps: stats.swaps,
+          swappedIndices: [i, j],
+          highlightValues: { values: [r], text: "Pivot" },
+          highlightIndices: Array.from(
+            { length: r - l + 1 },
+            (_, index) => l + index
+          ),
+          description: `Swapped arr[${i}] = ${arr[i]} and arr[${j}] = ${arr[j]} to move smaller element before the pivot.`,
+        });
+      }
     }
   }
 
-  stats.swaps++;
-  [arr[i + 1], arr[r]] = [arr[r], arr[i + 1]];
-  history.push({
-    arrayState: [...arr],
-    comparisons: stats.comparisons,
-    swaps: stats.swaps,
-    comparedIndices: [i + 1, r],
-    description: `Swapped arr[${i + 1}](${arr[i + 1]}) & arr[${r}](${arr[r]})`,
-  });
+  if (i + 1 !== r) {
+    stats.swaps++;
+    [arr[i + 1], arr[r]] = [arr[r], arr[i + 1]];
+
+    history.push({
+      arrayState: [...arr],
+      comparisons: stats.comparisons,
+      swaps: stats.swaps,
+      swappedIndices: [i + 1, r],
+      highlightIndices: Array.from(
+        { length: r - l + 1 },
+        (_, index) => l + index
+      ),
+      description: `Placed the pivot arr[${r}] = ${pivot} at its correct position by swapping with arr[${
+        i + 1
+      }] = ${arr[i + 1]}.`,
+    });
+  }
 
   return i + 1;
 }

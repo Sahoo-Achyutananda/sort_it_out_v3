@@ -59,12 +59,6 @@ function ArrayContainer({ state, dispatch, algo }) {
           <div className={styles.PlayControls}>
             <Timeline state={state} dispatch={dispatch} />
             <ControlButtons state={state} dispatch={dispatch} algo={algo} />
-
-            {/* <Tooltip title="Time Taken ⌛" interactive followCursor>
-          <div>
-            <Timer getState={() => state} dispatch={dispatch} />
-          </div>
-        </Tooltip> */}
           </div>
         </div>
         <div className={styles.stats}>
@@ -107,13 +101,17 @@ function Bar({ arrayContainerRef, state, height, index }) {
   const barClasses = [
     styles.bar,
     state.selectedIndices.includes(index) ? styles.selected : "",
-    // state.swappedIndices.includes(index) ? styles.compared : "",
+    state.swappedIndices.includes(index) ? styles.swapped : "",
+    state.highlightValues.includes(index) ? styles.highlight : "",
+    state.highlightIndices.includes(index) ? styles.enlarged : "",
   ].join(" ");
 
   const indexClasses = [
     styles.index,
-    state.highlightIndices.includes(index) ? styles.highlightedIndex : "",
+    state.highlightIndices.includes(index) ? styles.highlightIndex : "",
   ].join(" ");
+
+  const isPivot = state.highlightValues.includes(index);
 
   return (
     <div className={styles.barContainer}>
@@ -126,7 +124,9 @@ function Bar({ arrayContainerRef, state, height, index }) {
         {index}
       </div>
       <Tooltip title={height} arrow>
-        <div className={barClasses} style={dimensions}></div>
+        <Tooltip title={state.highlightValueText} open={isPivot} arrow>
+          <div className={barClasses} style={dimensions}></div>
+        </Tooltip>
       </Tooltip>
     </div>
   );

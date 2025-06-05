@@ -267,11 +267,25 @@
   justify-content: center;
 }
 .selected {
-  background: #4ef578;
+  background: #4ef578 !important;
   margin-inline: 1px;
 }
-.compared {
-  background: #a418eae2 !important;
+.swapped {
+  background: #4ef578 !important;
+  margin-inline: 1px;
+}
+.highlight {
+  background: white !important;
+  margin-inline: 1px;
+}
+
+.enlarged {
+  transform: translateY(10px);
+}
+
+.highlightIndex {
+  /* background: rgb(95, 0, 189) !important;
+  color: white !important; */
   margin-inline: 1px;
 }
 
