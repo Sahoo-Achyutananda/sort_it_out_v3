@@ -27,7 +27,11 @@ function InputFields({ dispatch, state, initialState }) {
   return (
     <div className={styles.Inputs}>
       <Tooltip
-        title="Enter Custom Array 📦: Separated by white space"
+        title={
+          !state.isSorting
+            ? "Enter Custom Array 📦: Separated by white space"
+            : "Enter Custom Array 📦: Disabled while sorting is active 🚫"
+        }
         followCursor
         interactive
       >
@@ -38,6 +42,7 @@ function InputFields({ dispatch, state, initialState }) {
           </div>
           <input
             type="text"
+            disabled={state.isSorting}
             placeholder="Enter Custom Array (eg: 20 30 50 10)"
             onChange={(e) =>
               dispatch({ type: "customInput", payload: e.target.value })

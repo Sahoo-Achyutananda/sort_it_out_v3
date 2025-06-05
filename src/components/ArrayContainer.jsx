@@ -220,7 +220,7 @@ function ControlButtons({ state, dispatch, algo }) {
 function Transcript({ state, dispatch }) {
   const itemRefs = useRef([]);
   const parentRef = useRef(null);
-  const [toggleAccordian, setToggleAccordian] = useState(false);
+  const [toggleAccordian, setToggleAccordian] = useState(true);
 
   // function handleToggleAccordian(){
   //   setToggleAccordian(!)
@@ -274,7 +274,7 @@ function Transcript({ state, dispatch }) {
         className={styles.AccordianTitle}
         onClick={() => setToggleAccordian(!toggleAccordian)}
       >
-        <span>Transcript</span>
+        <span>Event Timeline</span>
         <span style={{ display: "flex", justifyContent: "center" }}>
           {toggleAccordian ? (
             <KeyboardArrowDownIcon fontSize="medium" />

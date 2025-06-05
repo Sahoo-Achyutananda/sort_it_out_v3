@@ -32,6 +32,13 @@ function HomePage() {
             Visit{" "}
             <a
               style={{ color: "blue", cursor: "pointer" }}
+              href="https://sort-it-out-v2-achyutananda-sahoo.netlify.app/"
+            >
+              Version 2
+            </a>
+            {/* */}| Visit{" "}
+            <a
+              style={{ color: "blue", cursor: "pointer" }}
               href="https://sorting-visualizer-achyutananda-sahoo.netlify.app/"
               // onClick={() => navigate("/racemode")}
             >

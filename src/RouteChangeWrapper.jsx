@@ -10,16 +10,16 @@ function RouteChangeWrapper({ children }) {
     const path = location.pathname;
 
     const titleMap = {
-      "/": "Home | Sort Visualizer - v3 ",
-      "/bubble": "Bubble Sort | Sort Visualizer - v3 ",
-      "/selection": "Selection Sort | Sort Visualizer - v3 ",
-      "/insertion": "Insertion Sort | Sort Visualizer - v3 ",
-      "/merge": "Merge Sort | Sort Visualizer - v3 ",
-      "/quick": "Quick Sort | Sort Visualizer - v3 ",
-      "/racemode": "Race Mode | Sort Visualizer - v3 ",
+      "/": "Home | Sort It Out - v3 ",
+      "/bubble": "Bubble Sort | Sort It Out - v3 ",
+      "/selection": "Selection Sort | Sort It Out - v3 ",
+      "/insertion": "Insertion Sort | Sort It Out - v3 ",
+      "/merge": "Merge Sort | Sort It Out - v3 ",
+      "/quick": "Quick Sort | Sort It Out - v3 ",
+      "/racemode": "Race Mode | Sort It Out - v3 ",
     };
 
-    document.title = titleMap[path] || "Sort Visualizer";
+    document.title = titleMap[path] || "Sort It Out ";
   }, [location]);
 
   useEffect(() => {
