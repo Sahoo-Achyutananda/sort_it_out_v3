@@ -15,9 +15,6 @@ function SortingLayout({ algorithm, json }) {
     stateRef.current = state;
   }, [state]);
 
-  // const controllerRef = useRef(null);
-  // controllerRef.current = new AbortController();
-
   useEffect(() => {});
 
   return (

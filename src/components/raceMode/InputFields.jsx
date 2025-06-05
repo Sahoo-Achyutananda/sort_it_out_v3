@@ -16,6 +16,8 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { ToastContainer, toast, Bounce } from "react-toastify";
+import Tooltip from "@mui/material/Tooltip";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 import Title from "../Title.jsx";
 
@@ -50,46 +52,51 @@ function InputFields({
       <Title title={"RACE MODE"} />
       <div className={styles.mainInputDiv}>
         <div className={styles.userInputs}>
-          <div className={`${styles.sliderDiv} ${styles.speedDiv}`}>
-            <SpeedIcon fontSize="small" sx={{ color: "white" }} />
-            <Slider
-              aria-label="Speed"
-              defaultValue={initialState.speed}
-              valueLabelDisplay="auto"
-              step={0.25}
-              marks
-              min={0.25}
-              max={10}
-              value={state.speed}
-              onChange={(e) =>
-                dispatch({
-                  type: "UPDATE_SPEED",
-                  payload: parseInt(e.target.value),
-                })
-              }
-              className={styles.speedSlider}
-            />
-          </div>
-          <div className={`${styles.sliderDiv} ${styles.valueDiv}`}>
-            <DataArrayIcon fontSize="small" sx={{ color: "white" }} />
-            <Slider
-              aria-label="Speed"
-              defaultValue={initialState.speed}
-              valueLabelDisplay="auto"
-              step={1}
-              marks
-              min={1}
-              max={50}
-              value={state.value}
-              onChange={(e) =>
-                dispatch({
-                  type: "UPDATE_VALUE",
-                  payload: parseInt(e.target.value),
-                })
-              }
-              className={styles.valueSlider}
-            />
-          </div>
+          <Tooltip interative followCursor title="Change Speed 🏃‍♀️">
+            <div className={`${styles.sliderDiv} ${styles.speedDiv}`}>
+              <SpeedIcon fontSize="small" sx={{ color: "white" }} />
+              <Slider
+                aria-label="Speed"
+                defaultValue={initialState.speed}
+                valueLabelDisplay="auto"
+                step={0.25}
+                marks
+                min={0.25}
+                max={10}
+                value={state.speed}
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE_SPEED",
+                    payload: parseInt(e.target.value),
+                  })
+                }
+                className={styles.speedSlider}
+              />
+            </div>
+          </Tooltip>
+
+          <Tooltip title="Change Array Size 📦" interative followCursor>
+            <div className={`${styles.sliderDiv} ${styles.valueDiv}`}>
+              <DataArrayIcon fontSize="small" sx={{ color: "white" }} />
+              <Slider
+                aria-label="Speed"
+                defaultValue={initialState.speed}
+                valueLabelDisplay="auto"
+                step={1}
+                marks
+                min={1}
+                max={50}
+                value={state.value}
+                onChange={(e) =>
+                  dispatch({
+                    type: "UPDATE_VALUE",
+                    payload: parseInt(e.target.value),
+                  })
+                }
+                className={styles.valueSlider}
+              />
+            </div>
+          </Tooltip>
           {/* </div> */}
         </div>
         <div className={styles.raceModeContainer}>
@@ -106,14 +113,28 @@ function InputFields({
             >
               <PlayArrowIcon fontSize="small" />
             </button>
-            <button
-              className={styles.buttonReset}
-              onClick={() =>
-                flushSync(() => dispatch({ type: "STOP-AND-RESET" }))
-              }
+            <Tooltip
+              title={state.raceStarted ? "STOP 🚫" : "RESET VALUES 🆕"}
+              interactive
+              followCursor
             >
-              <StopIcon fontSize="small" />
-            </button>
+              <button
+                className={styles.buttonReset}
+                onClick={() =>
+                  flushSync(() => {
+                    state.raceStarted
+                      ? dispatch({ type: "STOP" })
+                      : dispatch({ type: "RESET" });
+                  })
+                }
+              >
+                {state.raceStarted ? (
+                  <StopIcon fontSize="small" />
+                ) : (
+                  <RestartAltIcon fontSize="small" />
+                )}
+              </button>
+            </Tooltip>
           </div>
           <div className={styles.controls}>
             <FormControl>
@@ -139,7 +160,6 @@ function InputFields({
                   width: "150px",
                   backgroundColor: "#1e1b4b", // deep purple bg
                   borderRadius: "8px",
-                  // border: "1px solid #7c3aed",
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "#7c3aed",
                   },
@@ -161,7 +181,6 @@ function InputFields({
                 ))}
               </Select>
             </FormControl>
-            {/* <button onClick={handleAddAlgorithm}>Add Algorithm</button> */}
             <button className={styles.buttonAdd} onClick={handleAddAlgorithm}>
               <AddBoxIcon fontSize="small" sx={{ color: "white" }} />
             </button>
@@ -207,19 +226,6 @@ function InputFields({
                       : notify()
                   }
                 >
-                  {/* <ToastContainer
-                    position="top-right"
-                    autoClose={3000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="dark"
-                    transition={Bounce}
-                  /> */}
                   ×
                 </button>
               </div>
@@ -240,20 +246,24 @@ function InputFields({
 
 function Comparisons({ comparisons }) {
   return (
-    <div className={styles.comparisons}>
-      {" "}
-      <CompareArrowsIcon fontSize="medium" /> {comparisons}{" "}
-    </div>
+    <Tooltip title="Comparisons" followCursor interactive>
+      <div className={styles.comparisons}>
+        {" "}
+        <CompareArrowsIcon fontSize="medium" /> {comparisons}{" "}
+      </div>
+    </Tooltip>
   );
 }
 
 function Swaps({ swaps }) {
   return (
-    <div className={styles.swaps}>
-      {" "}
-      <SwapHorizIcon fontSize="medium" />
-      {swaps}{" "}
-    </div>
+    <Tooltip title="Swaps" interactive followCursor>
+      <div className={styles.swaps}>
+        {" "}
+        <SwapHorizIcon fontSize="medium" />
+        {swaps}{" "}
+      </div>
+    </Tooltip>
   );
 }
 

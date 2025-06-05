@@ -1,8 +1,8 @@
-import bubbleSort from "../../algorithms/bubble";
-import insertionSort from "../../algorithms/insertion";
-import selectionSort from "../../algorithms/selection";
-import performMergeSort from "../../algorithms/merge";
-import performQuickSort from "../../algorithms/quick";
+import bubbleSort from "../../algorithms_racemode/bubble";
+import insertionSort from "../../algorithms_racemode/insertion";
+import selectionSort from "../../algorithms_racemode/selection";
+import performMergeSort from "../../algorithms_racemode/merge";
+import performQuickSort from "../../algorithms_racemode/quick";
 import { generateArrayforRace } from "../../utils/utils";
 
 const algorithms = {
@@ -87,6 +87,35 @@ function reducer(state, action) {
       };
     }
 
+    case "RESET": {
+      const newArray = generateArrayforRace(state.value);
+      const updatedActiveAlgorithms = Object.keys(
+        state.activeAlgorithms
+      ).reduce((acc, key) => {
+        acc[key] = {
+          ...state.activeAlgorithms[key],
+          array: newArray,
+          value: newArray.length,
+          isSorting: false,
+          time: 0,
+          comparisons: 0,
+          swaps: 0,
+          highlightedIndices: [],
+          selectedIndices: [],
+          hold: [],
+        };
+        return acc;
+      }, {});
+
+      return {
+        ...state,
+        raceStarted: false,
+        array: [...newArray],
+        time: 0,
+        activeAlgorithms: updatedActiveAlgorithms,
+      };
+    }
+
     case "UPDATE_SPEED": {
       const newSpeed = action.payload;
       const updatedActiveAlgorithms = Object.keys(
@@ -131,7 +160,7 @@ function reducer(state, action) {
       };
     }
 
-    case "STOP-AND-RESET": {
+    case "STOP": {
       const { activeAlgorithms } = state;
       const updatedActiveAlgorithms = Object.keys(activeAlgorithms).reduce(
         (acc, key) => {
@@ -251,24 +280,6 @@ function reducer(state, action) {
         },
       };
     }
-
-    // case "sortingCompleted": {
-    //   const { algoName } = action;
-    //   return {
-    //     ...state,
-    //     activeAlgorithms: {
-    //       ...state.activeAlgorithms,
-    //       [algoName]: {
-    //         ...state.activeAlgorithms[algoName],
-    //         isSorting: false,
-    //         selectedIndices: [],
-    //         highlightIndices: [],
-    //         hold: [],
-    //       },
-    //     },
-    //   };
-    // }
-
     case "sortingCompleted": {
       const { algoName } = action;
 

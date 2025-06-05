@@ -18,6 +18,8 @@ function ArrayContainer({ state, dispatch, algo }) {
 
   useEffect(() => {
     let interval;
+    if (state.currentStep === state.history.length - 1)
+      dispatch({ type: "sortingCompleted" });
     if (state.isPlaying) {
       interval = setInterval(() => {
         dispatch({ type: "stepForward" });
@@ -283,12 +285,13 @@ function Transcript({ state, dispatch }) {
       </div>
       <div
         className={`${
-          !state.isSorting ? styles.TranscriptPlaceholder : styles.Transcript
+          !state.history.length
+            ? styles.TranscriptPlaceholder
+            : styles.Transcript
         } ${toggleAccordian ? styles.show : styles.hide}`}
         ref={parentRef}
-        // onScroll={handleScroll}
       >
-        {state.isSorting ? (
+        {state.history.length ? (
           state.history.map((item, index) => (
             <TranscriptItem
               key={index}

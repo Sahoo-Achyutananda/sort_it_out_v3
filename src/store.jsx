@@ -19,6 +19,8 @@ export function reducer(state, action) {
         return {
           ...state,
           array: step.arrayState,
+          isSorting:
+            state.currentStep === state.history.length - 1 ? false : true,
           selectedIndices: step.comparedIndices || state.selectedIndices || [],
           swaps: step.swaps || state.swaps || 0,
           comparisons: step.comparisons || state.swaps || 0,
@@ -34,6 +36,7 @@ export function reducer(state, action) {
         const step = state.history[state.currentStep - 1];
         return {
           ...state,
+          isSorting: true,
           array: step.arrayState,
           selectedIndices: step.comparedIndices || state.selectedIndices || [],
           swaps: step.swaps || state.swaps || 0,
@@ -53,6 +56,8 @@ export function reducer(state, action) {
     case "seek":
       return {
         ...state,
+        isSorting:
+          state.currentStep === state.history.length - 1 ? false : true,
         array: state.history[parseInt(action.payload)].arrayState,
         selectedIndices:
           state.history[parseInt(action.payload)].comparedIndices,
@@ -176,7 +181,9 @@ export function reducer(state, action) {
       return {
         ...state,
         isSorting: false,
+        isPlaying: false,
         selectedIndices: [],
+        history: state.history,
         highlightIndices: [],
         swappedIndices: [],
         hold: [],
