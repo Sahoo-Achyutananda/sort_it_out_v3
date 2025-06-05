@@ -1,6 +1,7 @@
 import TypedText from "./TypedText";
 import styles from "./HomePage.module.css";
 import SelectNavigation from "./SelectNavigation";
+import ProjectDescription from "./ProjectDescription.jsx";
 import BackgroundVideo from "./BackgroundVideo.jsx";
 import { useNavigate } from "react-router-dom";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -36,14 +37,6 @@ function HomePage() {
             >
               Version 2
             </a>
-            {/* */}| Visit{" "}
-            <a
-              style={{ color: "blue", cursor: "pointer" }}
-              href="https://sorting-visualizer-achyutananda-sahoo.netlify.app/"
-              // onClick={() => navigate("/racemode")}
-            >
-              Version 1
-            </a>
           </div>
         </div>
       </BackgroundVideo>
@@ -67,6 +60,7 @@ function HomePage() {
       <div className={styles.raceModeSection}>
         <RaceMode />
       </div>
+      <ProjectDescription />
     </div>
   );
 }
