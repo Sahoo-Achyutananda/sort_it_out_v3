@@ -92,7 +92,10 @@ function ProjectDescription() {
           </div>
           <button
             className={styles.visitBtn}
-            onClick={() => (window.location.href = "/v1")}
+            onClick={() =>
+              (window.location.href =
+                "https://sorting-visualizer-achyutananda-sahoo.netlify.app/")
+            }
           >
             Visit v1
           </button>
@@ -165,14 +168,18 @@ function ProjectDescription() {
 
           <button
             className={styles.visitBtn}
-            onClick={() => (window.location.href = "/v2")}
+            onClick={() =>
+              (window.location.href =
+                "https://sort-it-out-v2-achyutananda-sahoo.netlify.app")
+            }
           >
             Visit v2
           </button>
         </div>
 
         {/* Version 3 */}
-        <div className={styles.versionCard}>
+
+        <div className={`${styles.versionCard}`}>
           <div className={styles.title}>
             <h3>Version 3</h3>
             <p>Sorting bars and raising bars — that's v3.</p>
@@ -238,6 +245,7 @@ function ProjectDescription() {
 
           <button
             className={styles.visitBtn}
+            disabled
             onClick={() => (window.location.href = "/v3")}
           >
             Visit v3
