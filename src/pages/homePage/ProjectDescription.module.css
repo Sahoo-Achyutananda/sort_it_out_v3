@@ -27,7 +27,7 @@
 }
 
 @media (max-width: 650px) {
-  .FormTitle > h2 {
+  .ProjectTitle > h2 {
     font: 600 35px "Roboto", sans-serif;
     color: white;
   }
