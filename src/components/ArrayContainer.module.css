@@ -384,6 +384,12 @@
   color: white;
 }
 
+.buttonForward:hover,
+.buttonRewind:hover {
+  background-color: rgb(62, 25, 98);
+  color: white;
+}
+
 .buttonReset:hover {
   background-color: rgb(144, 3, 32);
 }

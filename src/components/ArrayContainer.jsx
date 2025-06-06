@@ -179,25 +179,33 @@ function ControlButtons({ state, dispatch, algo }) {
   return (
     <>
       <div className={styles.buttonDiv}>
-        <button className={styles.buttonStart} onClick={handleStart}>
-          {!state.isPlaying ? (
-            <PlayArrowIcon fontSize="small" />
-          ) : (
-            <PauseIcon fontSize="small" />
-          )}
-        </button>
-        <button
-          className={styles.buttonRewind}
-          onClick={() => dispatch({ type: "stepBackward" })}
-        >
-          <FastRewindIcon fontSize="small" />
-        </button>
-        <button
-          className={styles.buttonForward}
-          onClick={() => dispatch({ type: "stepForward" })}
-        >
-          <FastForwardIcon fontSize="small" />
-        </button>
+        <Tooltip title={!state.isPlaying ? "Play" : "Pause"} interactive arrow>
+          <button className={styles.buttonStart} onClick={handleStart}>
+            {!state.isPlaying ? (
+              <PlayArrowIcon fontSize="small" />
+            ) : (
+              <PauseIcon fontSize="small" />
+            )}
+          </button>
+        </Tooltip>
+        <Tooltip title="Step Back" interactive arrow>
+          <button
+            disabled={!state.isSorting}
+            className={styles.buttonRewind}
+            onClick={() => dispatch({ type: "stepBackward" })}
+          >
+            <FastRewindIcon fontSize="small" />
+          </button>
+        </Tooltip>
+        <Tooltip title="Step Ahead" interactive arrow>
+          <button
+            disabled={!state.isSorting}
+            className={styles.buttonForward}
+            onClick={() => dispatch({ type: "stepForward" })}
+          >
+            <FastForwardIcon fontSize="small" />
+          </button>
+        </Tooltip>
         <Tooltip
           title={state.isSorting ? "Stop Sorting 🚫" : "Generate NEW Array"}
         >
