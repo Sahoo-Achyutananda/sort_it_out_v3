@@ -9,14 +9,40 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.7;
 }
+.ProjectTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.ProjectDescription > h2 {
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
+.ProjectDescription > h2,
+.ProjectTitle > h2 {
+  /* font-size: 2rem; */
+
   text-align: center;
   /* border-bottom: 2px solid #a077e9; */
-  padding-bottom: 0.5rem;
+  /* padding-bottom: 0.5rem; */
+  font: 600 50px "Roboto", sans-serif;
+  color: white;
+}
+
+@media (max-width: 650px) {
+  .FormTitle > h2 {
+    font: 600 35px "Roboto", sans-serif;
+    color: white;
+  }
+
+  .ProjectTitle > span {
+    font: italic 200 13px "Roboto", sans-serif;
+    color: white;
+  }
+}
+
+.ProjectTitle > span {
+  font-style: italic;
+  margin-bottom: 1rem;
+  font-size: 15px;
+  text-align: center;
 }
 
 .ProjectDescription > h3 {

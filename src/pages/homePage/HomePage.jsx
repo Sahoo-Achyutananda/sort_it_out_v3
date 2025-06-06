@@ -58,11 +58,13 @@ function HomePage() {
           })}
         </div>
       </div> */}
-      <Feedback />
-      {/* <div className={styles.raceModeSection}>
+
+      <div className={styles.raceModeSection}>
         <RaceMode />
-      </div> */}
-      {/* <ProjectDescription /> */}
+      </div>
+      <ProjectDescription />
+      <div className={styles.Divider}></div>
+      <Feedback />
     </div>
   );
 }

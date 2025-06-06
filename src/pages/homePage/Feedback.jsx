@@ -3,15 +3,18 @@ import CloseIcon from "@mui/icons-material/Close";
 import styles from "./Feedback.module.css";
 import supabase from "../../utils/supabase";
 import { ToastContainer, toast, Bounce } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 function Feedback() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [anonymous, setAnonymous] = useState(false);
-
+  const [dataSubmitted, setDataSubmitted] = useState(false);
+  const [response, setResponse] = useState("");
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: "",
     comments: "",
     rating: 0,
+    source: location.pathname,
   });
 
   const handleFormData = (e) => {
@@ -43,9 +46,9 @@ function Feedback() {
       name: formData.name,
       overall_rating: formData.rating,
       comments: formData.comments,
+      source: formData.source,
     });
 
-    console.log(response);
     if (response.status === 201) {
       setFormData({
         name: "",
@@ -53,67 +56,104 @@ function Feedback() {
         comments: "",
       });
     }
+    setResponse(response.status);
     setIsSubmitting(false);
+    setDataSubmitted(true);
   }
   return (
-    <div className={styles.FormDiv}>
-      <form className={styles.Form} onSubmit={(e) => handleFormSubmit(e)}>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          className={styles.NameField}
-          onChange={(e) => handleFormData(e)}
-          placeholder="Your Name"
-        />
-
-        <textarea
-          rows={10}
-          cols={50}
-          name="comments"
-          value={formData.comments}
-          className={styles.CommentsField}
-          onChange={(e) => handleFormData(e)}
-          placeholder="Your Comments"
-        />
-        <Rating length={10} formData={formData} setFormData={setFormData} />
-        <button type="submit" className={styles.SubmitBtn}>
-          {!isSubmitting ? "SUBMIT" : "...."}
-        </button>
-        <ToastContainer />
-      </form>
-    </div>
+    <>
+      <div className={styles.FormTitle}>
+        <h2>Give Your Feedback</h2>
+        <p>
+          Provide your valuable feedback so that i can improve my future
+          projects.
+        </p>
+      </div>
+      <div className={styles.FormDiv}>
+        {!dataSubmitted ? (
+          <form className={styles.Form} onSubmit={(e) => handleFormSubmit(e)}>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              className={styles.NameField}
+              onChange={(e) => handleFormData(e)}
+              placeholder="Your Name"
+            />
+            <input
+              type="text"
+              name="source"
+              value={location.pathname}
+              style={{ display: "none" }}
+            />
+            <textarea
+              rows={10}
+              cols={50}
+              name="comments"
+              value={formData.comments}
+              className={styles.CommentsField}
+              onChange={(e) => handleFormData(e)}
+              placeholder="Your Comments"
+            />
+            <Rating length={10} formData={formData} setFormData={setFormData} />
+            <button type="submit" className={styles.SubmitBtn}>
+              {!isSubmitting ? "SUBMIT" : "...."}
+            </button>
+            <ToastContainer />
+          </form>
+        ) : (
+          <div className={styles.SubmitResponse}>
+            {response === 201
+              ? "Thank You for submitting your Feedback 💖"
+              : "There's some Error in Form Submission"}
+          </div>
+        )}
+        <div
+          style={!dataSubmitted ? { display: "none" } : { display: "block" }}
+        >
+          <button
+            type="submit"
+            className={styles.SubmitBtn}
+            onClick={() => setDataSubmitted(false)}
+          >
+            {response === 201 ? "SUBMIT ANOTHER FEEDBACK" : "TRY AGAIN"}
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 
 function Rating({ length, formData, setFormData }) {
   const [hoverCount, setHoverCount] = useState(0);
-  const [registeredCount, setRegisteredCount] = useState(0);
 
   function handleRegisteredCount(val) {
-    setRegisteredCount(Number(val));
     setFormData({ ...formData, rating: Number(val) });
   }
 
   return (
-    <div className={styles.RatingField}>
-      {Array.from({ length: length }, (_, index) => {
-        return (
-          <RatingBox
-            index={index}
-            key={index}
-            hoverCount={hoverCount}
-            registeredCount={registeredCount}
-            setHoverCount={setHoverCount}
-            handleRegisteredCount={handleRegisteredCount}
-          />
-        );
-      })}
-      <div
-        className={styles.RemoveRating}
-        onClick={() => handleRegisteredCount(0)}
-      >
-        <CloseIcon fontSize="medium" />
+    <div className={styles.RatingComponent}>
+      <p>Rating</p>
+
+      <div className={styles.RatingField}>
+        {Array.from({ length: length }, (_, index) => {
+          return (
+            <RatingBox
+              index={index}
+              key={index}
+              hoverCount={hoverCount}
+              registeredCount={formData.rating}
+              setHoverCount={setHoverCount}
+              handleRegisteredCount={handleRegisteredCount}
+            />
+          );
+        })}
+        <div
+          className={styles.RemoveRating}
+          onClick={() => handleRegisteredCount(0)}
+        >
+          <CloseIcon fontSize="medium" />
+        </div>
       </div>
     </div>
   );

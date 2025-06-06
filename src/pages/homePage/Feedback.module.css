@@ -1,9 +1,37 @@
+.FormTitle {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.FormTitle > h2 {
+  font: 600 50px "Roboto", sans-serif;
+  color: white;
+}
+
+.FormTitle > p {
+  font: italic 200 15px "Roboto", sans-serif;
+  color: white;
+  text-align: center;
+}
+
 .FormDiv {
   width: 600px;
   height: auto;
   font: 500 0.9rem "Roboto", sans-serif;
 
   margin: 20px 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.FormDiv > span {
+  color: white;
+  font: 500 1.2rem "Roboto", sans-serif;
 }
 
 .Form {
@@ -20,6 +48,10 @@
 
   gap: 1px;
   justify-content: space-between;
+}
+
+.RatingComponent {
+  width: 100%;
 }
 
 .RatingBox,
@@ -80,12 +112,87 @@
   border: none;
 }
 
+.RatingComponent > p {
+  font-style: italic;
+  color: white;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 .SubmitBtn {
-  width: 200px;
+  width: auto;
+  min-width: 200px;
+  padding: 5px 15px;
   height: 40px;
   border: none;
   border-radius: 5px;
   background-color: blueviolet;
   color: white;
+  margin-top: 20px;
   font: 500 0.9rem "Roboto", sans-serif;
+}
+
+@media (max-width: 650px) {
+  .FormDiv {
+    width: 450px;
+  }
+
+  .RatingBox,
+  .RemoveRating {
+    width: 25px;
+    height: 25px;
+  }
+
+  .FormTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .FormTitle > h2 {
+    font: 600 35px "Roboto", sans-serif;
+    color: white;
+  }
+
+  .FormTitle > p {
+    /* width: 80%; */
+    font: italic 200 13px "Roboto", sans-serif;
+    color: white;
+  }
+}
+
+@media (max-width: 475px) {
+  .FormDiv {
+    width: 325px;
+  }
+  .Form {
+    align-items: center;
+  }
+  .RatingBox,
+  .RemoveRating {
+    width: 16px;
+    height: 16px;
+  }
+  .FormTitle > p {
+    width: 80%;
+    font: italic 200 13px "Roboto", sans-serif;
+    color: white;
+  }
+
+  .RatingComponent > p {
+    font-style: italic;
+    font-size: 13px;
+    color: white;
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }
+}
+
+.SubmitResponse {
+  width: 70%;
+  text-align: center;
+  font: 500 20px "Roboto", sans-serif;
+  color: white;
 }

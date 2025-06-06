@@ -9,12 +9,16 @@ function ProjectDescription() {
   const iconSize = { width: "25px", height: "25px" };
   return (
     <div className={styles.ProjectDescription}>
-      <h2> About This Project</h2>
+      <div className={styles.ProjectTitle}>
+        <h2> About This Project</h2>
+        <span>First love gave me butterflies. First project gave me bugs.</span>
+      </div>
       <p>
-        Welcome to the <strong>Sorting Visualizer</strong> — a glorious labor of
-        love, caffeine, and chaos. This is a <strong>personal project</strong>,
-        born from a late-night impulse to make colorful bars dance to the rhythm
-        of algorithms. Why i made this ?
+        Welcome to the <strong>SORT IT OUT</strong> — a glorious labor of love,
+        caffeine, and chaos. This is a <strong>personal project</strong>, born
+        from a late-night impulse to make colorful bars dance to the rhythm of
+        algorithms.<strong>Also, this is my first Major Project.</strong> Why i
+        made this ?
       </p>
       <p>
         <span>
@@ -30,6 +34,10 @@ function ProjectDescription() {
           <CheckCircleIcon fontSize="small" style={{ color: "white" }} />
           Also, because the idea of Bubble Sort losing to Quick Sort in a
           head-to-head race is hilarious.
+        </span>
+        <span>
+          <CheckCircleIcon fontSize="small" style={{ color: "white" }} />
+          Needed a good Project for my resume/portfolio.
         </span>
       </p>
 
