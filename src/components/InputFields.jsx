@@ -37,7 +37,7 @@ function InputFields({ dispatch, state, initialState }) {
       >
         <div className={styles.userArrayInput}>
           <div>
-            Disclaimer: Maximun accepted value is 300, Values greater than 300
+            Disclaimer: Maximun accepted value is 350, Values greater than 350
             will be ignored{" "}
           </div>
           <input

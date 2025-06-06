@@ -93,7 +93,7 @@ export function reducer(state, action) {
         .trim()
         .split(/\s+/) // yeh more than one space ko bhi ignore kar deta hai !
         .map((i) => parseInt(i))
-        .filter((num) => !isNaN(num) && num <= 300);
+        .filter((num) => !isNaN(num) && num <= 350);
       return {
         ...state,
         value: arr.length ? arr.length : 20,

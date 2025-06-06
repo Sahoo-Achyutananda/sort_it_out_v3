@@ -62,6 +62,7 @@ function Feedback() {
   }
   return (
     <>
+      <div className={styles.Divider}></div>
       <div className={styles.FormTitle}>
         <h2>Give Your Feedback</h2>
         <p>

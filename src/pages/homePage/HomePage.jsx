@@ -63,7 +63,7 @@ function HomePage() {
         <RaceMode />
       </div>
       <ProjectDescription />
-      <div className={styles.Divider}></div>
+
       <Feedback />
     </div>
   );

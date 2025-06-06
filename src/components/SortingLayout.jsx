@@ -6,6 +6,7 @@ import Details from "./Details.jsx";
 import styles from "./SortingLayout.module.css";
 import { reducer, initialState } from "../store.jsx";
 import Title from "./Title.jsx";
+import Feedback from "../pages/homePage/Feedback.jsx";
 
 function SortingLayout({ algorithm, json }) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -37,6 +38,15 @@ function SortingLayout({ algorithm, json }) {
           <Code json={json} />
           <Details json={json} />
         </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Feedback />
       </div>
     </>
   );

@@ -334,9 +334,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.Divider {
-  border: dashed 2px darkviolet;
-  width: 70%;
-  margin-bottom: 30px;
-}
