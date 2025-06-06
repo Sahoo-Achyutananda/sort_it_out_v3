@@ -5,6 +5,7 @@ import ProjectDescription from "./ProjectDescription.jsx";
 import BackgroundVideo from "./BackgroundVideo.jsx";
 import { useNavigate } from "react-router-dom";
 import CircleIcon from "@mui/icons-material/Circle";
+import Feedback from "./Feedback.jsx";
 
 // import data from "../../Data/data.js";
 
@@ -57,10 +58,11 @@ function HomePage() {
           })}
         </div>
       </div> */}
-      <div className={styles.raceModeSection}>
+      <Feedback />
+      {/* <div className={styles.raceModeSection}>
         <RaceMode />
-      </div>
-      <ProjectDescription />
+      </div> */}
+      {/* <ProjectDescription /> */}
     </div>
   );
 }

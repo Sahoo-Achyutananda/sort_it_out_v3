@@ -45,6 +45,12 @@ export default function Footer() {
           <LinkedInIcon />
         </IconButton>
       </Box>
+      <Box sx={{ mt: 1 }}>
+        <script
+          type="text/javascript"
+          src="https://counter.websiteout.com/js/7/6/0/0"
+        ></script>
+      </Box>
     </Box>
   );
 }
