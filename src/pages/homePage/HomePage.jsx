@@ -88,7 +88,7 @@ function HomePage() {
       </div>
       <ProjectDescription />
 
-      <Feedback scrollRef={feedbackRef} />
+      <Feedback scrollRef={feedbackRef} fetchRatings={fetchRatings} />
     </div>
   );
 }

@@ -229,52 +229,53 @@ function Transcript({ state, dispatch }) {
   const itemRefs = useRef([]);
   const parentRef = useRef(null);
   const [toggleAccordian, setToggleAccordian] = useState(true);
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
+  const scrollTimeout = useRef(null);
 
-  // function handleToggleAccordian(){
-  //   setToggleAccordian(!)
-  // }
-  // const scrollTimeout = useRef(null);
-  // const [isUserScrolling, setIsUserScrolling] = useState(false);
-  // const handleScroll = () => {
-  //   setIsUserScrolling(true);
-  //   setTimeout(() => {
-  //     setIsUserScrolling(false);
-  //   }, 1500);
-  // };
+  const handleScroll = () => {
+    if (!isUserScrolling) {
+      setIsUserScrolling(true);
+    }
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
+    }
 
-  // useEffect(() => {
-  //   const parent = parentRef.current;
+    scrollTimeout.current = setTimeout(() => {
+      setIsUserScrolling(false);
+    }, 5000);
+  };
 
-  //   if (parent) {
-  //     parent.addEventListener("scroll", handleScroll);
-  //   }
-
-  //   return () => {
-  //     if (parent) parent.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+  useEffect(() => {
+    return () => {
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const activeRef = itemRefs.current[state.currentStep];
     const parent = parentRef.current;
 
     if (activeRef && parent) {
-      const parentRect = parent.getBoundingClientRect();
-      const activeRect = activeRef.getBoundingClientRect();
+      if (!isUserScrolling && parentRef.current) {
+        const parentRect = parent.getBoundingClientRect();
+        const activeRect = activeRef.getBoundingClientRect();
 
-      if (
-        activeRect.top < parentRect.top ||
-        activeRect.bottom > parentRect.bottom
-      ) {
-        const scrollPosition = activeRef.offsetTop - parent.offsetTop;
+        if (
+          activeRect.top < parentRect.top ||
+          activeRect.bottom > parentRect.bottom
+        ) {
+          const scrollPosition = activeRef.offsetTop - parent.offsetTop;
 
-        parent.scrollTo({
-          top: scrollPosition,
-          behavior: "smooth",
-        });
+          parent.scrollTo({
+            top: scrollPosition,
+            behavior: "smooth",
+          });
+        }
       }
     }
-  }, [state.currentStep]);
+  }, [state.currentStep, isUserScrolling]);
 
   return (
     <div className={styles.Accordian}>
@@ -298,6 +299,7 @@ function Transcript({ state, dispatch }) {
             : styles.Transcript
         } ${toggleAccordian ? styles.show : styles.hide}`}
         ref={parentRef}
+        onScroll={handleScroll}
       >
         {state.history.length ? (
           state.history.map((item, index) => (

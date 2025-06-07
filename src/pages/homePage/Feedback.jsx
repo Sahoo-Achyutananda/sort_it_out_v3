@@ -5,7 +5,7 @@ import supabase from "../../utils/supabase";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import { useLocation } from "react-router-dom";
 
-function Feedback({ scrollRef = null }) {
+function Feedback({ scrollRef = null, fetchRatings }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [dataSubmitted, setDataSubmitted] = useState(false);
   const [response, setResponse] = useState("");
@@ -59,6 +59,7 @@ function Feedback({ scrollRef = null }) {
     setResponse(response.status);
     setIsSubmitting(false);
     setDataSubmitted(true);
+    fetchRatings();
   }
   return (
     <>
