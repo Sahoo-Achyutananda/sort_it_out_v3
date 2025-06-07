@@ -4,9 +4,10 @@ function BackgroundVideo({ children }) {
   return (
     <>
       <div className={styles.backgroundVideo}>
-        <video autoPlay loop muted playsInline className={styles.video}>
+        {/* <video autoPlay loop muted playsInline className={styles.video}>
           <source src="/SORT_IT_OUT.mp4" type="video/mp4" />
-        </video>
+        </video> */}
+        <img src="/BG3.jpg" alt="Sort IT Out" loading="lazy" />
         <div className={styles.overlay}>{children}</div>
       </div>
     </>
