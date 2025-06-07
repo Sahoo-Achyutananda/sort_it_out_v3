@@ -79,7 +79,7 @@ function Feedback({ scrollRef = null }) {
               value={formData.name}
               className={styles.NameField}
               onChange={(e) => handleFormData(e)}
-              placeholder="Your Name"
+              placeholder="Your Name (optional)"
             />
             <input
               type="text"
@@ -94,7 +94,7 @@ function Feedback({ scrollRef = null }) {
               value={formData.comments}
               className={styles.CommentsField}
               onChange={(e) => handleFormData(e)}
-              placeholder="Your Comments"
+              placeholder="Your Comments (optional)"
             />
             <Rating length={10} formData={formData} setFormData={setFormData} />
             <button type="submit" className={styles.SubmitBtn}>
