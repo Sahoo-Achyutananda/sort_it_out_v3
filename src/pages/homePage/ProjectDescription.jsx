@@ -192,6 +192,7 @@ function ProjectDescription() {
             <StackIcon name="js" style={iconSize} />
             <StackIcon name="reactjs" style={iconSize} />
             <StackIcon name="materialui" style={iconSize} />
+            <StackIcon name="supabase" style={iconSize} />
           </p>
 
           <div className={styles.featureSection}>

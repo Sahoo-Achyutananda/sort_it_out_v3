@@ -5,7 +5,7 @@ import supabase from "../../utils/supabase";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import { useLocation } from "react-router-dom";
 
-function Feedback() {
+function Feedback({ scrollRef = null }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [dataSubmitted, setDataSubmitted] = useState(false);
   const [response, setResponse] = useState("");
@@ -62,7 +62,7 @@ function Feedback() {
   }
   return (
     <>
-      <div className={styles.Divider}></div>
+      <div ref={scrollRef} className={styles.Divider}></div>
       <div className={styles.FormTitle}>
         <h2>Give Your Feedback</h2>
         <p>

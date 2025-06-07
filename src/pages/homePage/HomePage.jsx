@@ -4,67 +4,91 @@ import SelectNavigation from "./SelectNavigation";
 import ProjectDescription from "./ProjectDescription.jsx";
 import BackgroundVideo from "./BackgroundVideo.jsx";
 import { useNavigate } from "react-router-dom";
-import CircleIcon from "@mui/icons-material/Circle";
+import { useEffect, useState, useRef } from "react";
+// import CircleIcon from "@mui/icons-material/Circle";
 import Feedback from "./Feedback.jsx";
-
-// import data from "../../Data/data.js";
+import supabase from "../../utils/supabase.js";
+import StarsIcon from "@mui/icons-material/Stars";
+import EastIcon from "@mui/icons-material/East";
 
 function HomePage() {
   const navigate = useNavigate();
+  const [currentRating, setCurrentRating] = useState(0);
+  const [totalRating, setTotalRating] = useState(0);
+  const feedbackRef = useRef(null);
+
+  function navigateToFeedbackSection() {
+    if (feedbackRef.current) {
+      feedbackRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  async function fetchRatings() {
+    const response = await supabase.from("feedback").select("overall_rating");
+    const ratingLength = response.data.length;
+    const ratingSum = response.data.reduce((curr, obj) => {
+      return obj.overall_rating + curr;
+    }, 0);
+    setCurrentRating((ratingSum / ratingLength).toFixed(1));
+    setTotalRating(ratingLength);
+  }
+
+  useEffect(() => {
+    fetchRatings();
+  }, []);
+
   return (
     <div className={styles.body}>
       <BackgroundVideo>
-        <div className={styles.titleCard}>
-          <div className={styles.element}>
-            <TypedText>{["Analyze", "Vizualize", "Play"]}</TypedText>
+        <div className={styles.HeroSection}>
+          <div className={styles.titleCard}>
+            <div className={styles.element}>
+              <TypedText>{["Analyze", "Vizualize", "Play"]}</TypedText>
+            </div>
+            <div className={styles.title}>
+              <h1>SORT IT OUT</h1>
+            </div>
+            <SelectNavigation text={"Algorithm"} />
+            <div className={styles.subtitle}>
+              Visit{" "}
+              <a
+                style={{ color: "blue", cursor: "pointer" }}
+                onClick={() => navigate("/racemode")}
+              >
+                Race Mode{" "}
+              </a>{" "}
+              | {/* <CircleIcon fontSize="small" /> Visit{" "} */}
+              Visit{" "}
+              <a
+                style={{ color: "blue", cursor: "pointer" }}
+                href="https://sort-it-out-v2-achyutananda-sahoo.netlify.app/"
+              >
+                Version 2
+              </a>
+            </div>
           </div>
-          <div className={styles.title}>
-            <h1>SORT IT OUT</h1>
-          </div>
-          <SelectNavigation text={"Algorithm"} />
-          <div className={styles.subtitle}>
-            Visit{" "}
-            <a
-              style={{ color: "blue", cursor: "pointer" }}
-              onClick={() => navigate("/racemode")}
-            >
-              Race Mode{" "}
-            </a>{" "}
-            | {/* <CircleIcon fontSize="small" /> Visit{" "} */}
-            Visit{" "}
-            <a
-              style={{ color: "blue", cursor: "pointer" }}
-              href="https://sort-it-out-v2-achyutananda-sahoo.netlify.app/"
-            >
-              Version 2
-            </a>
+          <div className={styles.RatingDiv}>
+            <div className={styles.Rating}>
+              <div className={styles.avgRating}>
+                <StarsIcon fontSize="large" style={{ color: "darkviolet" }} />
+                {currentRating}
+              </div>
+              <div className={styles.totalRating}>({totalRating})</div>
+            </div>
+            <div className={styles.RatingLink}>
+              <a onClick={() => navigateToFeedbackSection()}>Give a rating</a>
+              <EastIcon fontSize="small" />
+            </div>
           </div>
         </div>
       </BackgroundVideo>
-      {/* <div className={styles.content}>
-        <div className={styles.cards}>
-          {Object.entries(data).map(([key]) => {
-            return (
-              <Card
-                key={key}
-                name={data[key].name}
-                image={data[key].image}
-                description={data[key].description}
-                time={data[key].time_complexity.worst}
-                space={data[key].space_complexity}
-                link={data[key].link}
-              />
-            );
-          })}
-        </div>
-      </div> */}
 
       <div className={styles.raceModeSection}>
         <RaceMode />
       </div>
       <ProjectDescription />
 
-      <Feedback />
+      <Feedback scrollRef={feedbackRef} />
     </div>
   );
 }
@@ -77,7 +101,7 @@ function RaceMode() {
       <div className={styles.raceMode}>
         <div className={styles.raceModeText}>
           <h3>
-            <TypedText>{["Check Out RACE MODE 🚀"]}</TypedText>
+            <TypedText>{["Check Out RACE MODE"]}</TypedText>
           </h3>
           <p>
             Ever wondered which sorting algorithm is the fastest? Let them
@@ -100,23 +124,6 @@ function RaceMode() {
         </div>
       </div>
     </>
-  );
-}
-
-function Card({ name, image, description, time, space, link }) {
-  const navigate = useNavigate();
-  return (
-    <div className={styles.card} onClick={() => navigate(link)}>
-      <div className={styles.image}>
-        <img src={image} />
-      </div>
-      <div className={styles.title}>{name}</div>
-      <div className={styles.description}>{description}</div>
-      <div className={styles.complexities}>
-        <div className={styles.timeComplexity}>Time : {time}</div>
-        <div className={styles.spaceComplexity}>Space : {space}</div>
-      </div>
-    </div>
   );
 }
 
