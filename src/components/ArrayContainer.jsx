@@ -190,7 +190,7 @@ function ControlButtons({ state, dispatch, algo }) {
         </Tooltip>
         <Tooltip title="Step Back" interactive arrow>
           <button
-            disabled={!state.isSorting}
+            // disabled={!state.isSorting}
             className={styles.buttonRewind}
             onClick={() => dispatch({ type: "stepBackward" })}
           >
@@ -199,7 +199,7 @@ function ControlButtons({ state, dispatch, algo }) {
         </Tooltip>
         <Tooltip title="Step Ahead" interactive arrow>
           <button
-            disabled={!state.isSorting}
+            // disabled={!state.isSorting}
             className={styles.buttonForward}
             onClick={() => dispatch({ type: "stepForward" })}
           >
