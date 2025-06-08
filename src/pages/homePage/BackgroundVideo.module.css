@@ -3,6 +3,29 @@
   overflow: hidden;
   width: 100%;
   height: 80vh;
+  background: linear-gradient(
+    -45deg,
+    #3a0ca3,
+    #7209b7,
+    #4895ef,
+    #4361ee,
+    #7209b7,
+    #3a0ca3
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .backgroundVideo > img {
