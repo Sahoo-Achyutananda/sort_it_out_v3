@@ -168,7 +168,11 @@
     width: 300px !important;
   }
   .raceModeText > h3 {
-    font: 800 25px "Raleway", sans-serif;
+    /* border-bottom: 3px solid ; */
+    font: 800 22px "Raleway", sans-serif !important;
+  }
+  .raceModeText > h3::after {
+    height: 3px;
   }
 
   .raceModeText > p {
@@ -314,7 +318,34 @@
 }
 
 .raceModeText > h3 {
+  position: relative;
+  width: fit-content;
   font: 800 30px "Raleway", sans-serif;
+  padding-bottom: 5px;
+}
+
+/* Underline animation using ::after */
+.raceModeText > h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 0;
+  background-color: rgb(200, 7, 91);
+  animation: underline 4s ease-out infinite;
+}
+
+@keyframes underline {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
 }
 
 .raceModeText > p {
