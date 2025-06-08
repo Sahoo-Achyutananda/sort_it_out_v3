@@ -5,12 +5,12 @@
   height: 80vh;
   background: linear-gradient(
     -45deg,
-    #3a0ca3,
-    #7209b7,
-    #4895ef,
-    #4361ee,
-    #7209b7,
-    #3a0ca3
+    #2a003f,
+    /* deep plum */ #4b0082,
+    /* indigo */ #800080,
+    /* classic purple */ #9d00ff,
+    /* vivid violet */ #b266ff,
+    /* soft lavender */ #4b0082 /* back to indigo for loop */
   );
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
@@ -25,6 +25,15 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* Optional: Slightly reduce animation load on mobile */
+@media (max-width: 768px) {
+  .backgroundVideo {
+    height: 75vh;
+    background-size: 300% 300%;
+    animation: gradientBG 20s ease infinite;
   }
 }
 
