@@ -37,6 +37,14 @@
   }
 }
 
+@media (max-width: 450px) {
+  .backgroundVideo {
+    height: 75vh;
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+  }
+}
+
 .backgroundVideo > img {
   position: absolute;
   width: 100%;
