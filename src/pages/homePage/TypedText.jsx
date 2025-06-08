@@ -15,7 +15,7 @@ const TypedText = ({ children }) => {
     return () => {
       typed.destroy();
     };
-  }, []);
+  }, [children]);
 
   return <span ref={el} />;
 };
