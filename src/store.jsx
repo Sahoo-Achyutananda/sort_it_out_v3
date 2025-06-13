@@ -64,8 +64,8 @@ export function reducer(state, action) {
     case "seek":
       return {
         ...state,
-        isSorting:
-          state.currentStep === state.history.length - 1 ? false : true,
+        isSorting: true,
+        // state.currentStep === state.history.length - 1 ? false : true,
         array: state.history[parseInt(action.payload)].arrayState,
         selectedIndices:
           state.history[parseInt(action.payload)].comparedIndices || [],
@@ -198,7 +198,7 @@ export function reducer(state, action) {
       launchConfetti();
       return {
         ...state,
-        isSorting: false,
+        // isSorting: false,
         isPlaying: false,
         selectedIndices: [],
         history: state.history,
