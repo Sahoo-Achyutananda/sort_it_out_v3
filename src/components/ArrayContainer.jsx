@@ -263,9 +263,8 @@ function Transcript({ state, dispatch }) {
         const activeRect = activeRef.getBoundingClientRect();
 
         if (
-          (activeRect.top < parentRect.top ||
-            activeRect.bottom > parentRect.bottom) &&
-          !isUserScrolling
+          activeRect.top < parentRect.top ||
+          activeRect.bottom > parentRect.bottom
         ) {
           const scrollPosition = activeRef.offsetTop - parent.offsetTop;
 
